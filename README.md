@@ -8,21 +8,21 @@ npm i objss
 ```
 
 ```js
-const ox = require('objss')
+const objss = require('objss')
 
-const css = ox({
+const css = objss({
   margin: 16,
   color: 'tomato'
 })
-// 'margin:16px;color:tomato'
+// 'margin:16px;color:tomato;'
 
-const css = ox({
+const css = objss({
   color: 'tomato',
   ':hover': {
     color: 'green'
   }
 })
-// 'color:tomato;:hover{color:green}'
+// 'color:tomato;&:hover{color:green;}'
 ```
 
 ## What is this for?
@@ -34,11 +34,17 @@ JavaScript object literals are often easier to work with.
 This can be used in place of tagged template literals.
 
 ```js
-foo([ox({ color: 'tomato' })])
-// The same as foo`color:tomato`
+foo([objss({ color: 'tomato' })])
+// The same as foo`color:tomato;`
 ```
 
 There might be other use-cases as well.
+
+Related:
+
+The reverse of this:
+
+[css-to-object](https://github.com/jxnblk/css-to-object)
 
 MIT License
 

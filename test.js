@@ -11,7 +11,7 @@ test('converts style object to css', t => {
   const css = ox({
     color: 'tomato'
   })
-  t.is(css, 'color:tomato')
+  t.is(css, 'color:tomato;')
 })
 
 test('converts numbers to pixel values', t => {
@@ -19,7 +19,7 @@ test('converts numbers to pixel values', t => {
     color: 'tomato',
     margin: 16
   })
-  t.is(css, 'color:tomato;margin:16px')
+  t.is(css, 'color:tomato;margin:16px;')
 })
 
 test('filters null values', t => {
@@ -27,7 +27,7 @@ test('filters null values', t => {
     margin: 8,
     padding: null
   })
-  t.is(css, 'margin:8px')
+  t.is(css, 'margin:8px;')
 })
 
 test('creates nested rules', t => {
@@ -35,9 +35,12 @@ test('creates nested rules', t => {
     color: 'tomato',
     ':hover': {
       color: 'green'
+    },
+    h1: {
+      fontSize: 48
     }
   })
-  t.regex(css, /:hover{/)
+  t.is(css, 'color:tomato;&:hover{color:green;}& h1{font-size:48px;}')
 })
 
 test('kebab cases keys', t => {
