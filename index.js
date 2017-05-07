@@ -13,15 +13,21 @@ const getParentKey = key => /^:/.test(key)
   ? key
   : '& ' + key
 
+const formatNested = (values, opts) => opts.newline
+  ? `\n${values}\n`
+  : values
+
 const ox = (style = {}, opts = {}) => toArr(style)
   .filter(s => s.value !== null)
   .map(s => typeof s.value === 'object'
     ? ({
       parent: getParentKey(s.key),
-      value: ox(s.value)
+      value: ox(s.value, opts)
     })
     : s)
-  .map(({ parent, key, value }) => parent ? `${parent}{${value}}` : `${key}:${px(key)(value)};`)
+  .map(({ parent, key, value }) => parent
+    ?  `${parent}{${formatNested(value, opts)}}`
+    : `${key}:${px(key)(value)};`)
   .join(opts.newline ? '\n' : '')
 
 module.exports = ox

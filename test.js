@@ -50,3 +50,13 @@ test('kebab cases keys', t => {
   t.regex(css, /margin-bottom/)
 })
 
+test('supports newline option', t => {
+  const css = ox({
+    margin: 16,
+    ':hover': {
+      color: 'tomato'
+    }
+  }, { newline: true })
+  t.is(css, 'margin:16px;\n&:hover{\ncolor:tomato;\n}')
+})
+
