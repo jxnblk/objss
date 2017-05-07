@@ -57,6 +57,6 @@ test('supports newline option', t => {
       color: 'tomato'
     }
   }, { newline: true })
-  t.is(css, 'margin:16px;\n&:hover{\ncolor:tomato;\n}')
+  t.is(css, 'margin:16px;\n&:hover{\n  color:tomato;\n}')
 })
 

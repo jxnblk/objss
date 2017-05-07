@@ -14,7 +14,7 @@ const getParentKey = key => /^:/.test(key)
   : '& ' + key
 
 const formatNested = (values, opts) => opts.newline
-  ? `\n${values}\n`
+  ? `\n  ${values.split('\n').join('\n  ')}\n`
   : values
 
 const ox = (style = {}, opts = {}) => toArr(style)
@@ -26,7 +26,7 @@ const ox = (style = {}, opts = {}) => toArr(style)
     })
     : s)
   .map(({ parent, key, value }) => parent
-    ?  `${parent}{${formatNested(value, opts)}}`
+    ? `${parent}{${formatNested(value, opts)}}`
     : `${key}:${px(key)(value)};`)
   .join(opts.newline ? '\n' : '')
 
